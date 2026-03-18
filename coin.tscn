@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bp8nkgyfqyjse"]
+
+[ext_resource type="Script" uid="uid://g1aansgkfc4b" path="res://coin.gd" id="1_d5gmh"]
+[ext_resource type="AudioStream" uid="uid://bjyl6lm2cwhih" path="res://coin sound.wav" id="2_0t63x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0t63x"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6qpsl"]
+material = SubResource("StandardMaterial3D_0t63x")
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.15
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d5gmh"]
+height = 0.15
+radius = 0.3
+
+[node name="Coin" type="Area3D" unique_id=43698102]
+script = ExtResource("1_d5gmh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1006112781]
+transform = Transform3D(1.3113416e-07, -1, 0, 1, 1.3113416e-07, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_6qpsl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2124168232]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_d5gmh")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=295692806]
+stream = ExtResource("2_0t63x")
+max_distance = 25.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

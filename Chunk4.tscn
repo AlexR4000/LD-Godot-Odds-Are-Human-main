@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://blqscwdc1kq4l"]
+
+[ext_resource type="Script" uid="uid://bonmlsitp38f6" path="res://chunk_4.gd" id="1_iyjse"]
+[ext_resource type="PackedScene" uid="uid://domkccusdani7" path="res://Chunk5.tscn" id="2_3hu2o"]
+[ext_resource type="PackedScene" uid="uid://bcdq6t36vkuij" path="res://Arch.tscn" id="2_5qxup"]
+[ext_resource type="PackedScene" uid="uid://c1h2ljih3p2wj" path="res://wall.tscn" id="3_x2bva"]
+[ext_resource type="PackedScene" uid="uid://dir2tme0h5aeh" path="res://primitive_stairs.tscn" id="4_vxgr3"]
+[ext_resource type="PackedScene" uid="uid://bp8nkgyfqyjse" path="res://coin.tscn" id="6_a1req"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3mpdw"]
+size = Vector3(10, 0.5, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xer38"]
+size = Vector3(9.848511, 0.5, 10)
+
+[node name="Node3D" type="Node3D" unique_id=1814977768]
+script = ExtResource("1_iyjse")
+possible_chunks = Array[PackedScene]([ExtResource("2_3hu2o")])
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=2050210158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0011519194, -0.22761643, 0.016906738)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=184893382]
+transform = Transform3D(1.62, 0, 0, 0, 1.13, 0, 0, 0, 4, -0.0010000467, 0.07500005, 0)
+mesh = SubResource("BoxMesh_3mpdw")
+
+[node name="arch_wide_red" parent="Floor/MeshInstance3D" unique_id=1996727198 instance=ExtResource("2_5qxup")]
+transform = Transform3D(1.5408986, 0, 0, 0, 1, 0, 0, 0, 0.5530894, 0.010565224, 0, 4.5061674)
+
+[node name="barrier_4x1x6" parent="Floor/MeshInstance3D" unique_id=588132630 instance=ExtResource("3_x2bva")]
+transform = Transform3D(-0.6504762, 0, -4.4652868e-08, 0, 1, 0, 5.6866437e-08, 0, -0.51076937, 3.752742, 0, 4.5249724)
+
+[node name="barrier_4x1x7" parent="Floor/MeshInstance3D" unique_id=1105998391 instance=ExtResource("3_x2bva")]
+transform = Transform3D(-0.6504762, 0, -4.4652868e-08, 0, 1, 0, 5.6866437e-08, 0, -0.51076937, -3.7316086, 0, 4.5249724)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1688134600]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0)
+shape = SubResource("BoxShape3D_xer38")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=206113532]
+transform = Transform3D(1, 0, 0, 0, -0.5186091, 0.8550115, 0, -0.8550115, -0.5186091, 0.0011519194, 9.008545, -1.3969078)
+shadow_enabled = true
+
+[node name="barrier_4x1x4" parent="." unique_id=1529003870 instance=ExtResource("3_x2bva")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -17)
+
+[node name="barrier_4x1x5" parent="." unique_id=467884214 instance=ExtResource("3_x2bva")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -17)
+
+[node name="barrier_4x1x6" parent="." unique_id=917989928 instance=ExtResource("3_x2bva")]
+transform = Transform3D(-3.826932e-07, 0, 1.022, 0, 2.06, 0, -8.755, 0, -4.4673037e-08, -6.7517076, 0, -0.21500015)
+
+[node name="barrier_4x1x7" parent="." unique_id=1811836853 instance=ExtResource("3_x2bva")]
+transform = Transform3D(-3.826932e-07, 0, 1.022, 0, 2.06, 0, -8.755, 0, -4.4673037e-08, 6.752, 0, -0.215)
+
+[node name="Primitive_Stairs" parent="." unique_id=180410593 instance=ExtResource("4_vxgr3")]
+transform = Transform3D(-4.3711385e-08, 0, 1.4967278, 0, 1, 0, -0.99999994, 0, -6.5424054e-08, 0, 0, -15.620713)
+
+[node name="Chunk5Spawn" type="Marker3D" parent="." unique_id=1219401756]
+transform = Transform3D(1, 0, -3.5527137e-15, 0, 1.0000001, 0, 0, 0, 1, 0, 1.4901161e-08, 39.999996)
+
+[node name="Coin" parent="." unique_id=43698102 instance=ExtResource("6_a1req")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3310926, 4.899983, 10.028558)
+
+[node name="barrier_4x1x8" parent="." unique_id=1023414682 instance=ExtResource("3_x2bva")]
+transform = Transform3D(-5.2453664e-09, 0, 0.505, 0, 1.113, 0, -0.12, 0, -2.2074252e-08, -0.10748768, 0, 3.7793818)
+
+[node name="barrier_4x1x11" parent="." unique_id=2018591899 instance=ExtResource("3_x2bva")]
+transform = Transform3D(-8.305164e-09, 0, 0.8, 0, 1.13, 0, -0.19, 0, -3.4969112e-08, -1.8715634, 0, -3.4263988)
+
+[node name="barrier_4x1x9" parent="." unique_id=1063967983 instance=ExtResource("3_x2bva")]
+transform = Transform3D(-8.305164e-09, 0, 0.8, 0, 1.13, 0, -0.19, 0, -3.4969112e-08, -0.10748768, 0, -8.87169)
+
+[node name="barrier_4x1x10" parent="." unique_id=1055434841 instance=ExtResource("3_x2bva")]
+transform = Transform3D(-8.305164e-09, 0, 0.8, 0, 1.13, 0, -0.19, 0, -3.4969112e-08, 2.321022, 0, 10.018841)

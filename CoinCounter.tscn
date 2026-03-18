@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dpcyiqrhot2ub"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=913968108]
+
+[node name="CoinCounter" type="Label" parent="." unique_id=1798802438]
+offset_right = 40.0
+offset_bottom = 23.0

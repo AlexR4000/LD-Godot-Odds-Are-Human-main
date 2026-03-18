@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://i3d7c05eenck"]
+
+[ext_resource type="Script" uid="uid://dhfygikbkgggf" path="res://chunk_1.gd" id="1_jvp2c"]
+[ext_resource type="PackedScene" uid="uid://c1h2ljih3p2wj" path="res://wall.tscn" id="1_kd0lt"]
+[ext_resource type="PackedScene" uid="uid://bcdq6t36vkuij" path="res://Arch.tscn" id="1_lxcn5"]
+[ext_resource type="PackedScene" uid="uid://h7j17hp114fj" path="res://Chunk2.tscn" id="2_hu87y"]
+[ext_resource type="PackedScene" uid="uid://dir2tme0h5aeh" path="res://primitive_stairs.tscn" id="2_lxcn5"]
+[ext_resource type="PackedScene" uid="uid://duf18d3ku7y8u" path="res://pillar_4.tscn" id="3_jvp2c"]
+[ext_resource type="PackedScene" uid="uid://bp8nkgyfqyjse" path="res://coin.tscn" id="6_4n1cq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_t2777"]
+size = Vector3(10, 0.5, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1l1qr"]
+size = Vector3(9.848511, 0.5, 10)
+
+[node name="Node3D" type="Node3D" unique_id=285894456]
+script = ExtResource("1_jvp2c")
+possible_chunks = Array[PackedScene]([ExtResource("2_hu87y")])
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=145827790]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0011519194, -0.22761643, 0.016906738)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=467609841]
+transform = Transform3D(1.62, 0, 0, 0, 1.13, 0, 0, 0, 4, -0.0010000467, 0.07500005, 0)
+mesh = SubResource("BoxMesh_t2777")
+
+[node name="arch_wide_red" parent="Floor/MeshInstance3D" unique_id=1996727198 instance=ExtResource("1_lxcn5")]
+transform = Transform3D(1.5408986, 0, 0, 0, 1, 0, 0, 0, 0.5530894, 0.010565224, 0, 4.5061674)
+
+[node name="barrier_4x1x6" parent="Floor/MeshInstance3D" unique_id=588132630 instance=ExtResource("1_kd0lt")]
+transform = Transform3D(-0.6504762, 0, -4.4652868e-08, 0, 1, 0, 5.6866437e-08, 0, -0.51076937, 3.752742, 0, 4.5249724)
+
+[node name="barrier_4x1x7" parent="Floor/MeshInstance3D" unique_id=1795937325 instance=ExtResource("1_kd0lt")]
+transform = Transform3D(-0.6504762, 0, -4.4652868e-08, 0, 1, 0, 5.6866437e-08, 0, -0.51076937, -3.7316086, 0, 4.5249724)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=410119116]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0)
+shape = SubResource("BoxShape3D_1l1qr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1707097791]
+transform = Transform3D(1, 0, 0, 0, -0.5186091, 0.8550115, 0, -0.8550115, -0.5186091, 0.0011519194, 9.008545, -1.3969078)
+shadow_enabled = true
+
+[node name="barrier_4x1x4" parent="." unique_id=94806192 instance=ExtResource("1_kd0lt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -17)
+
+[node name="barrier_4x1x5" parent="." unique_id=262139763 instance=ExtResource("1_kd0lt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -17)
+
+[node name="barrier_4x1x6" parent="." unique_id=1143453449 instance=ExtResource("1_kd0lt")]
+transform = Transform3D(-3.826932e-07, 0, 1.022, 0, 2.06, 0, -8.755, 0, -4.4673037e-08, -6.7517076, 0, -0.215)
+
+[node name="barrier_4x1x7" parent="." unique_id=1189952687 instance=ExtResource("1_kd0lt")]
+transform = Transform3D(-3.826932e-07, 0, 1.022, 0, 2.06, 0, -8.755, 0, -4.4673037e-08, 6.752, 0, -0.215)
+
+[node name="Primitive_Stairs" parent="." unique_id=180410593 instance=ExtResource("2_lxcn5")]
+transform = Transform3D(-4.3711385e-08, 0, 1.4967278, 0, 1, 0, -0.99999994, 0, -6.5424054e-08, 0, 0, -15.620713)
+
+[node name="pillar4" parent="." unique_id=432821199 instance=ExtResource("3_jvp2c")]
+transform = Transform3D(1, 0, 0, 0, 0.9, 0, 0, 0, 1.1, 5.117861, 0, 21.564163)
+
+[node name="pillar4" parent="pillar4" unique_id=1307934732 instance=ExtResource("3_jvp2c")]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.8999997, 0, 0, 0, 1.0999997, -0.331995, 0, 20.427841)
+
+[node name="pillar5" parent="." unique_id=33446884 instance=ExtResource("3_jvp2c")]
+transform = Transform3D(1, 0, 0, 0, 0.9, 0, 0, 0, 1.1, 5.117861, 0, 28.134499)
+
+[node name="pillar4" parent="pillar5" unique_id=2115400659 instance=ExtResource("3_jvp2c")]
+transform = Transform3D(-0.99999976, 0, -9.616501e-08, 0, 0.8999996, 0, 8.7422755e-08, 0, -1.0999995, -10.724495, 0, -55.075104)
+
+[node name="pillar4" parent="pillar5/pillar4" unique_id=1505206374 instance=ExtResource("3_jvp2c")]
+transform = Transform3D(1, 0, 1.4210855e-14, 0, 0.90000015, 0, -2.1316282e-14, 0, 1.1, -0.5791979, 0, -3.3083267)
+
+[node name="Chunk2Spawn" type="Marker3D" parent="." unique_id=94587319]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="Coin" parent="." unique_id=43698102 instance=ExtResource("6_4n1cq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9149904, 3.8244252, 11.648499)
