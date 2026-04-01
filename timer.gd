@@ -2,7 +2,7 @@ extends Timer
 
 @onready var time_label: Label = $"../CanvasLayer/MarginContainer/TimeLabel"
 
-var countdown_seconds: int = 15
+var countdown_seconds: int = 120
 var is_blinking: bool = false
 var blink_visible: bool = true
 
