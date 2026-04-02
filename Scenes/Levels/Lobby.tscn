@@ -25,6 +25,8 @@ size = Vector3(10, 0.5, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_pjh5x"]
 size = Vector3(1, 1, 0.8204346)
 
+[sub_resource type="BoxMesh" id="BoxMesh_k0wky"]
+
 [node name="Lobby" type="Node3D" unique_id=164308359]
 script = ExtResource("1_k0wky")
 
@@ -71,3 +73,12 @@ offset_bottom = 45.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 32
 text = "Starting in 5 seconds..."
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=887122343]
+transform = Transform3D(17.136753, 0, 0, 0, 0.09996935, 0, 0, 0, 4.5959783, 0, 0.09910512, 6.6746616)
+mesh = SubResource("BoxMesh_k0wky")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1904293055]
+transform = Transform3D(1.0151786, 0, 0, 0, 2, 0, 0, 0, -1.1573837, 0, 0.09910512, 2.3533735)
+visible = false
+mesh = SubResource("BoxMesh_k0wky")
