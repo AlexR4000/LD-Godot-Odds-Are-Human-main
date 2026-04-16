@@ -3,7 +3,6 @@
 [ext_resource type="FontFile" uid="uid://c8fq11d6kpiip" path="res://Fonts/Cartoonic Massive Regular.ttf" id="1_b42ut"]
 [ext_resource type="Script" uid="uid://bxfgb5ivicri4" path="res://Scripts/main_menu.gd" id="1_hqtmt"]
 [ext_resource type="FontFile" uid="uid://cj5l0d0oook5m" path="res://Fonts/Cartoonic Massive 3D.ttf" id="2_hqtmt"]
-[ext_resource type="StyleBox" uid="uid://bkbq1dlir4fcj" path="res://new_style_box_flat.tres" id="3_tfrft"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tfrft"]
 content_margin_left = 0.0
@@ -16,6 +15,20 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bc4mk"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+shadow_size = 5
+shadow_offset = Vector2(0, 2)
 
 [node name="MainMenu" type="Control" unique_id=201417284]
 layout_mode = 3
@@ -63,11 +76,7 @@ size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_b42ut")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/normal = ExtResource("3_tfrft")
-theme_override_styles/pressed = ExtResource("3_tfrft")
-theme_override_styles/hover = ExtResource("3_tfrft")
-theme_override_styles/disabled = ExtResource("3_tfrft")
-theme_override_styles/focus = ExtResource("3_tfrft")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bc4mk")
 text = "Start Game
 "
 
@@ -77,11 +86,7 @@ size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_b42ut")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/normal = ExtResource("3_tfrft")
-theme_override_styles/pressed = ExtResource("3_tfrft")
-theme_override_styles/hover = ExtResource("3_tfrft")
-theme_override_styles/disabled = ExtResource("3_tfrft")
-theme_override_styles/focus = ExtResource("3_tfrft")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bc4mk")
 text = "Options"
 
 [node name="Exit" type="Button" parent="VBoxContainer" unique_id=247912485]
@@ -90,11 +95,7 @@ size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_b42ut")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/normal = ExtResource("3_tfrft")
-theme_override_styles/pressed = ExtResource("3_tfrft")
-theme_override_styles/hover = ExtResource("3_tfrft")
-theme_override_styles/disabled = ExtResource("3_tfrft")
-theme_override_styles/focus = ExtResource("3_tfrft")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bc4mk")
 text = "Exit"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=207933892]
