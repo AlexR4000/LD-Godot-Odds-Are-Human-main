@@ -1,10 +1,15 @@
 extends Node
 
 @export var coins: int = 0
+var menu_open: bool = false
 
 func add_coin():
 	coins += 1
 	print("Coins:", coins)
+
+func set_menu_open(value: bool) -> void:
+	menu_open = value
+	print("Menu open:", menu_open)
 
 func reset_player_to_spawn():
 	var current_scene = get_tree().current_scene

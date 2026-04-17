@@ -17,7 +17,7 @@ var camera_pitch: float = 0.0
 
 # Third-person camera settings
 @export var camera_distance: float = 5.0
-@export var camera_height: float = 1.5   # vertical offset on the spring arm
+@export var camera_height: float = 1.5
 
 @onready var anim: AnimationPlayer = $Rig_Medium/AnimationPlayer
 @onready var visual: Node3D = $Rig_Medium
@@ -41,7 +41,6 @@ var has_air_dashed: bool = false
 const MODEL_FACING_OFFSET := 0.0
 const TURN_SPEED := 10.0
 
-# Tracks the horizontal orbit angle of the camera around the player
 var camera_yaw: float = 0.0
 
 
@@ -49,10 +48,8 @@ func _ready():
 	add_to_group("player")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-	# Set up the spring arm for third-person
 	spring_arm.spring_length = camera_distance
 	spring_arm.position.y = camera_height
-	# Prevent the spring arm from inheriting the player's Y rotation
 	spring_arm.set_as_top_level(true)
 
 	if anim == null:
@@ -60,6 +57,10 @@ func _ready():
 
 
 func _unhandled_input(event):
+	# Block player/gameplay input while ESC menu is open
+	if GameManager.menu_open:
+		return
+
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		camera_yaw -= event.relative.x * mouse_sensitivity
 		camera_pitch -= event.relative.y * mouse_sensitivity
@@ -82,17 +83,29 @@ func _play_anim(name: StringName) -> void:
 
 
 func _physics_process(delta):
+	# Keep world running, but lock the player while menu is open
+	if GameManager.menu_open:
+		velocity.x = 0.0
+		velocity.z = 0.0
+		air_dash_timer = 0.0
+		move_and_slide()
+
+		if not is_on_floor():
+			_play_anim(&"Player/Jump_Full_Long")
+		else:
+			_play_anim(&"Player/T-Pose")
+		return
+
 	# ---------------- CAMERA ORBIT (spring arm) ----------------
-	# Right stick look
 	var look_x := Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 	if abs(look_x) > stick_deadzone:
 		camera_yaw -= look_x * stick_sensitivity * delta
+
 	var look_y := Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 	if abs(look_y) > stick_deadzone:
 		camera_pitch -= look_y * stick_sensitivity * delta
 		camera_pitch = clamp(camera_pitch, -max_look_angle, max_look_angle)
 
-	# Move the spring arm base to follow the player, then rotate it
 	spring_arm.global_position = global_position + Vector3(0, camera_height, 0)
 	spring_arm.rotation_degrees.x = camera_pitch
 	spring_arm.rotation_degrees.y = camera_yaw
@@ -100,10 +113,9 @@ func _physics_process(delta):
 	# ---------------- MOVEMENT INPUT ----------------
 	var input_dir: Vector2 = Input.get_vector("left", "right", "forward", "back")
 
-	# Base movement direction on the camera's yaw only (not pitch)
 	var yaw_rad := deg_to_rad(camera_yaw)
 	var forward := Vector3(-sin(yaw_rad), 0, -cos(yaw_rad)).normalized()
-	var right   := Vector3( cos(yaw_rad), 0, -sin(yaw_rad)).normalized()
+	var right := Vector3(cos(yaw_rad), 0, -sin(yaw_rad)).normalized()
 
 	var direction: Vector3 = (forward * -input_dir.y) + (right * input_dir.x)
 	if direction.length() > 0.0:
@@ -113,7 +125,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Dash") and not is_on_floor() and not has_air_dashed:
 		has_air_dashed = true
 		air_dash_timer = air_dash_time
-		air_dash_direction = direction if direction.length() > 0.0 else (-global_transform.basis.z * Vector3(1,0,1)).normalized()
+		air_dash_direction = direction if direction.length() > 0.0 else (-global_transform.basis.z * Vector3(1, 0, 1)).normalized()
 		velocity.y = 0.0
 
 	# ---------------- AIR DASH ACTIVE ----------------

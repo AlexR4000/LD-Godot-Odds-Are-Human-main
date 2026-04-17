@@ -30,8 +30,6 @@ var pressed_styles: Dictionary = {}
 
 func _ready() -> void:
 	print("ESC MENU LOADED")
-	process_mode = Node.PROCESS_MODE_ALWAYS
-
 	visible = true
 	panel.visible = false
 	panel.modulate.a = 0.0
@@ -61,6 +59,7 @@ func _ready() -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 	_update_hint(true)
+	GameManager.set_menu_open(false)
 
 	print("Controllers connected: ", Input.get_connected_joypads())
 
@@ -202,7 +201,7 @@ func open_menu() -> void:
 	panel_tween = create_tween()
 	panel_tween.tween_property(panel, "modulate:a", 1.0, FADE_DURATION)
 
-	get_tree().paused = true
+	GameManager.set_menu_open(true)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	using_keyboard = false
 	_set_current_button(current_index)
@@ -218,7 +217,7 @@ func close_menu() -> void:
 		panel.visible = false
 	)
 
-	get_tree().paused = false
+	GameManager.set_menu_open(false)
 
 	if _is_main_menu():
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -316,7 +315,7 @@ func _press_current_button() -> void:
 
 	_apply_pressed_style(button)
 
-	await get_tree().create_timer(0.08, true).timeout
+	await get_tree().create_timer(0.08).timeout
 
 	is_pressing = false
 	_refresh_button_styles()
@@ -349,7 +348,7 @@ func _on_reset_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
-	get_tree().paused = false
+	GameManager.set_menu_open(false)
 	using_keyboard = false
 
 	if panel_tween:
@@ -361,17 +360,10 @@ func _on_quit_pressed() -> void:
 	hint_box.modulate.a = 0.0
 
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	get_tree().change_scene_to_file(MAIN_MENU_PATH)
 	print("QUIT PRESSED")
 	print("Changing to: ", MAIN_MENU_PATH)
-	get_tree().paused = false
-	using_keyboard = false
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file(MAIN_MENU_PATH)
-	get_tree().paused = false
-	using_keyboard = false
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	get_tree().change_scene_to_file(MAIN_MENU_PATH)
+
 
 func _force_hide_menu() -> void:
 	if panel_tween:
@@ -382,3 +374,4 @@ func _force_hide_menu() -> void:
 	hint_box.visible = false
 	hint_box.modulate.a = 0.0
 	using_keyboard = false
+	GameManager.set_menu_open(false)
